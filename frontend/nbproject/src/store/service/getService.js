@@ -6,14 +6,11 @@ export const getDataService = () => {
   headers.append("Accept", "application/json");
   headers.append("Origin", "http://localhost:3000");
 
-  return axios({
-    method: "GET",
-    url: "http://localhost:4002/NBProject",
-
-    headers: headers,
-  })
+  return axios
+    .get("http://localhost:4002/NBProject")
     .then((response) => {
-      return response;
+      // return response;
+      console.log("response", response);
     })
     .catch((err) => {
       return err.response.data;
