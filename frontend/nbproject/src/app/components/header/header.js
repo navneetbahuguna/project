@@ -8,6 +8,7 @@ import {
   Grid,
 } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
+import Logo from "../../../assests/images/booklogo.png";
 // import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
 import Form from "../registration/form";
@@ -16,13 +17,14 @@ import Form from "../registration/form";
 const styles = (theme) => ({
   root: {
     flexGrow: 1,
-    background: "#8BC34A",
+    background: "transparent",
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
+    color: "#000",
   },
   button: {
     textTransform: "none",
@@ -58,9 +60,9 @@ class header extends Component {
             </IconButton> */}
             <Grid container direction="row">
               <Grid item md={4} style={{ display: "flex" }}>
-                {/* <img src={Logo} height={50} width={50} /> */}
+                <img src={Logo} height={50} width={50} />
                 <Typography variant="h6" className={classes.title}>
-                  Physiotherapy Center
+                  Book Store
                 </Typography>
               </Grid>
             </Grid>

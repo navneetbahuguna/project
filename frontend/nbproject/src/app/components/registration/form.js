@@ -8,15 +8,13 @@ export default class Form extends Component {
   };
   render() {
     const { open, onClose } = this.props;
+    const values = { name: "", email: "", phone: "", comment: "" };
+
     return (
       <Grid>
         <Dialog open={open} onClose={onClose}>
           <DialogContent>
-            <RegistartionForm
-              initialValues={{ name: "", email: "", phone: "", password: "" }}
-              onSubmit={this.handleSubmit}
-              validationSchema={validationSchema}
-            />
+            <RegistartionForm onSubmit={this.submit} />
           </DialogContent>
         </Dialog>
       </Grid>

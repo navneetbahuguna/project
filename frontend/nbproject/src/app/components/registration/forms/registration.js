@@ -1,71 +1,144 @@
-import React, { Component, Fragment } from "react";
-import { Formik, Form } from "formik";
-import { Grid, Typography, TextField, Button } from "@material-ui/core";
-class RegistrationForm extends Component {
-  apiSubmit = (e) => {
-    console.log("yes", e);
-    this.props.onSubmit("yes");
-  };
+import React from "react";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { Typography, TextField, Button } from "@material-ui/core";
+
+class RegistartionForm extends React.Component {
   render() {
-    const { validationSchema, initialValues, touched, error } = this.props;
     return (
       <Formik
-        onSubmit={(e) => this.apiSubmit(e)}
-        // validationSchema={validationSchema}
-        validateOnBlur={false}
-        validateOnChange={false}
-        initialValues={initialValues}
-        render={({ dirty, isSubmitting, ...props }) => {
-          console.log("isSubmitting", props);
-          return (
-            <Fragment>
-              <Grid>
-                <Form noValidate>
-                  <Typography>Name</Typography>
-                  <TextField
-                    variant="outlined"
-                    margin="dense"
-                    error={touched && touched.name && error.name ? true : false}
-                    // helperText={touched && error ? error : null}
-                    fullWidth
-                  />
-                  <Typography>Email</Typography>
-                  <TextField
-                    variant="outlined"
-                    margin="dense"
-                    // error={touched && error ? true : false}
-                    // helperText={touched && error ? error : null}
-                    fullWidth
-                  />
-                  <Typography>Phone</Typography>
-                  <TextField
-                    variant="outlined"
-                    margin="dense"
-                    // error={touched && error ? true : false}
-                    // helperText={touched && error ? error : null}
-                    fullWidth
-                  />
-                  <Typography>Password</Typography>
-                  <TextField
-                    variant="outlined"
-                    margin="dense"
-                    // error={touched && error ? true : false}
-                    // helperText={touched && error ? error : null}
-                    fullWidth
-                  />
-                  <Button
-                    // onClick={this.apiSubmit}
-                    type="submit"
-                  >
-                    Submit
-                  </Button>
-                </Form>
-              </Grid>
-            </Fragment>
-          );
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
         }}
+        validationSchema={Yup.object().shape({
+          firstName: Yup.string().required("First Name is required"),
+          lastName: Yup.string().required("Last Name is required"),
+          email: Yup.string()
+            .email("Email is invalid")
+            .required("Email is required"),
+          password: Yup.string()
+            .min(6, "Password must be at least 6 characters")
+            .required("Password is required"),
+          confirmPassword: Yup.string()
+            .oneOf([Yup.ref("password"), null], "Passwords must match")
+            .required("Confirm Password is required"),
+        })}
+        onSubmit={(fields) => {
+          alert("SUCCESS!! :-)\n\n" + JSON.stringify(fields, null, 4));
+        }}
+        render={({ errors, status, touched }) => (
+          <Form>
+            <div className="form-group">
+              <Typography>First Name</Typography>
+
+              <TextField
+                fullWidth
+                variant="outlined"
+                name="firstName"
+                type="text"
+                className={
+                  "form-control" +
+                  (errors.firstName && touched.firstName ? " is-invalid" : "")
+                }
+                style={{ margin: "2%" }}
+              />
+              <ErrorMessage
+                name="firstName"
+                component="div"
+                className="invalid-feedback"
+              />
+            </div>
+            <div className="form-group">
+              <Typography>Last Name</Typography>
+              <TextField
+                fullWidth
+                variant="outlined"
+                name="lastName"
+                type="text"
+                className={
+                  "form-control" +
+                  (errors.lastName && touched.lastName ? " is-invalid" : "")
+                }
+              />
+              <ErrorMessage
+                name="lastName"
+                component="div"
+                className="invalid-feedback"
+              />
+            </div>
+            <div className="form-group">
+              <Typography>Email</Typography>
+              <TextField
+                fullWidth
+                variant="outlined"
+                name="email"
+                type="text"
+                className={
+                  "form-control" +
+                  (errors.email && touched.email ? " is-invalid" : "")
+                }
+              />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="invalid-feedback"
+              />
+            </div>
+            <div className="form-group">
+              <Typography>Password</Typography>
+              <TextField
+                fullWidth
+                variant="outlined"
+                name="password"
+                type="password"
+                className={
+                  "form-control" +
+                  (errors.password && touched.password ? " is-invalid" : "")
+                }
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="invalid-feedback"
+              />
+            </div>
+            <div className="form-group">
+              <Typography>Confirm Password</Typography>
+              <TextField
+                fullWidth
+                variant="outlined"
+                name="confirmPassword"
+                type="password"
+                className={
+                  "form-control" +
+                  (errors.confirmPassword && touched.confirmPassword
+                    ? " is-invalid"
+                    : "")
+                }
+              />
+              <ErrorMessage
+                name="confirmPassword"
+                component="div"
+                className="invalid-feedback"
+              />
+            </div>
+            <div className="form-group">
+              <Button  varinattype="submit" className="btn btn-primary mr-2">
+                Register
+              </Button>
+              <Button type="reset" className="btn btn-secondary">
+                Reset
+              </Button>
+            </div>
+          </Form>
+        )}
       />
     );
   }
 }
-export default RegistrationForm;
+
+export default RegistartionForm;
