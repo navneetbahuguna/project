@@ -10,7 +10,7 @@ var port = process.env.PORT || 4002;
 
 app.use("/NBProject", require("./routes/userRoutes/posts")); //1st method
 const adminRoutes = require("./routes/adminRoutes/posts"); //2nd method
-app.use("/NBProject",adminRoutes )
+app.use("/NBProject", adminRoutes);
 
 app.use(cors());
 app.use((req, res, next) => {
@@ -29,7 +29,6 @@ app.use((req, res, next) => {
   }
   next();
 });
-
 
 //Routes not found
 app.use((req, res, next) => {
