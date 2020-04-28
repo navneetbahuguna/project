@@ -9,8 +9,7 @@ export const getDataService = () => {
   return axios
     .get("http://localhost:4002/NBProject")
     .then((response) => {
-      // return response;
-      console.log("response", response);
+      return response;
     })
     .catch((err) => {
       return err.response.data;

@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 import { Dialog, DialogContent, Grid } from "@material-ui/core";
-import RegistartionForm from "../registration/forms/registration";
-import validationSchema from "../registration/forms/validationSchema";
-export default class Form extends Component {
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import RegistartionForm from "../Login/login";
+import { getData } from "../../../store/actions/get.action";
+class Form extends Component {
   handleSubmit = () => {
     console.log("done");
   };
+  componentDidMount = () => {
+    console.log("this.props.getData", this.props.getData);
+  };
   render() {
-    const { open, onClose } = this.props;
-    const values = { name: "", email: "", phone: "", comment: "" };
-
+    const { open, onClose, data } = this.props;
+    console.log("getData", data);
     return (
       <Grid>
         <Dialog open={open} onClose={onClose}>
@@ -21,3 +25,16 @@ export default class Form extends Component {
     );
   }
 }
+const mapStateToProps = ({ getdataReducer }) => {
+  return {
+    data: getdataReducer,
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, {
+    getData,
+
+    // getInclusionAction
+  })(Form)
+);

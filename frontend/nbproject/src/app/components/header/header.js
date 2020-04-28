@@ -28,6 +28,7 @@ const styles = (theme) => ({
   },
   button: {
     textTransform: "none",
+    color: "#000",
   },
 });
 class header extends Component {
@@ -67,12 +68,8 @@ class header extends Component {
               </Grid>
             </Grid>
             <Grid>
-              <Button
-                color="inherit"
-                onClick={this.handleOpen}
-                className={classes.button}
-              >
-                Registration
+              <Button onClick={this.handleOpen} className={classes.button}>
+                Login
               </Button>
             </Grid>
           </Toolbar>
