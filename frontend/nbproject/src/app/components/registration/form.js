@@ -8,9 +8,8 @@ import { getData } from "../../../store/actions/get.action";
 class Form extends Component {
   handleSubmit = (data) => {
     console.log("data", data);
-    let name = data.name;
-    console.log("name", name);
-    this.props.getData(name);
+
+    this.props.getData(data);
   };
   componentDidMount = () => {
     this.props.getData();

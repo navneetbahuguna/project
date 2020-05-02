@@ -3,9 +3,10 @@ import { getDataService } from "../service/getService";
 
 import { getDataSucess } from "../actions/get.action";
 import * as types from "../action.type";
-export function* getDataSaga() {
+export function* getDataSaga(data) {
+  console.log("data", data);
   try {
-    const response = yield call(getDataService);
+    const response = yield call(getDataService, data);
 
     yield put(getDataSucess(response.data));
   } catch (error) {

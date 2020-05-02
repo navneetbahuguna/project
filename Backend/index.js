@@ -6,7 +6,7 @@ let mongoose = require("mongoose");
 const bodyparser = require("body-parser");
 const morgan = require("morgan"); //for view the details of running time
 //require("./mongo")  //return data from mongo.js file
-var port = process.env.PORT || 4006;
+var port = process.env.PORT || 4003;
 
 app.use("/NBProject", require("./routes/userRoutes/posts")); //1st method
 const adminRoutes = require("./routes/adminRoutes/posts"); //2nd method

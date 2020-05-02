@@ -7,10 +7,15 @@ export const getDataService = (req) => {
   headers.append("Accept", "application/json");
   headers.append("Origin", "http://localhost:3001");
 
-  return axios
-    .get("http://localhost:4006/NBProject/signup")
+  return axios({
+    method: "GET",
+    url:
+      "https://infinite-wildwood-05252.herokuapp.com/NBProject/adminExtractAllData",
+
+    headers: headers,
+  })
     .then((response) => {
-      // console.log("response", response);
+      console.log("response", response);
       return response;
     })
     .catch((err) => {
